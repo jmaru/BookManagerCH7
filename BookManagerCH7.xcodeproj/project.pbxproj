@@ -34,6 +34,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = BookManagerCH7;
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		458E624D2F6F2A9F00B2F368 /* BookManagerCH7Tests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
