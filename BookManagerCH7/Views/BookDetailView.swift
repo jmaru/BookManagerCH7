@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookDetailView: View {
     
-    var book: Book
+    @Binding var book: Book
     
     var body: some View {
         VStack{
@@ -20,10 +20,15 @@ struct BookDetailView: View {
                     .frame(width: 100, height: 100)
                 VStack{
                     Text(book.title)
+                        .font(.headline)
                     Text("by: \(book.author)")
                 }
             }
             Text(book.summary)
+            Button("Edit book"){
+                book.title = "New Title"
+            }
         }
+        
     }
 }
