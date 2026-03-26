@@ -19,9 +19,14 @@ struct BookListItem: View {
             VStack(alignment: .leading){
                 Text(book.title)
                     .font(.headline)
-                Text("by \(book.author)")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                if(!book.author.isEmpty){
+                    Text("by \(book.author)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                if(book.rating >= 1){
+                    StarRatingView(rating: book.rating, style:.compact)
+                }
             }
         }
     }

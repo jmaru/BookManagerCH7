@@ -26,12 +26,12 @@ struct ContentView: View {
                 showAddBook.toggle()
             })
             .sheet(isPresented: $showAddBook){
+                //onDismiss()
                 if(!newBook.title.isEmpty){
                     books.append(newBook)
                 }
                 newBook = Book(title:"",author:"", summary: "", cover:"lotr_fellowship")
-            }
-            content:{
+            } content:{
                 AddEditView(book: $newBook)
             }
         }

@@ -11,24 +11,52 @@ struct BookDetailView: View {
     
     @Binding var book: Book
     
+    @State private var showEditBookSheet: Bool = false
+    
     var body: some View {
-        VStack{
-            HStack{
-                Image(book.cover)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                VStack{
-                    Text(book.title)
-                        .font(.headline)
-                    Text("by: \(book.author)")
+        NavigationStack{
+            VStack(alignment: .leading){
+                HStack{
+                    Image(book.cover)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 150)
+                    VStack{
+                        Text(book.title)
+                            .font(.headline)
+                        if(!book.author.isEmpty){
+                            Text("by: \(book.author)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    Spacer()
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.bottom)
+                Text(book.summary)
+                    .padding(.bottom)
+                //
+                Text("My review")
+                    .font(.title2)
+                    .padding(.bottom)
+                StarRatingView(rating: book.rating)
+                Text(book.review)
+                    .padding(8)
+                Spacer()
             }
-            Text(book.summary)
-            Button("Edit book"){
-                book.title = "New Title"
-            }
+            .padding()
+            .navigationTitle("Book Details")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Edit"){
+                showEditBookSheet.toggle()
+            })
+            .sheet(
+                isPresented: $showEditBookSheet,
+                content: {
+                    AddEditView(book: $book)
+                }
+            )
         }
-        
     }
 }
