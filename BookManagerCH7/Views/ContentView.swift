@@ -11,29 +11,17 @@ import SwiftData
 struct ContentView: View {
     
     @State private var books = getBooks()
-    @State private var showAddBook: Bool = false
-    @State private var newBook = Book(title:"",author:"", summary: "", cover:"lotr_fellowship")
 
     var body: some View {
-        NavigationStack {
-            List($books){ book in
-                NavigationLink(destination: BookDetailView(book: book)){
-                    BookListItem(book: book.wrappedValue)
+        TabView {
+            BookListView(books: $books)
+                .tabItem{
+                    Label("Books", systemImage: "books.vertical.fill")
                 }
-            }
-            .navigationTitle("Book Manager")
-            .navigationBarItems(trailing: Button("Add Book"){
-                showAddBook.toggle()
-            })
-            .sheet(isPresented: $showAddBook){
-                //onDismiss()
-                if(!newBook.title.isEmpty){
-                    books.append(newBook)
+            FavoritesView(books: $books)
+                .tabItem{
+                    Label("Favorites", systemImage: "heart.fill")
                 }
-                newBook = Book(title:"",author:"", summary: "", cover:"lotr_fellowship")
-            } content:{
-                AddEditView(book: $newBook)
-            }
         }
     }
 }
