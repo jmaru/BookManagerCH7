@@ -31,6 +31,10 @@ struct BookDetailView: View {
                         }
                     }
                     Spacer()
+                    HStack{
+                        Spacer()
+                        FavoriteToggle(isFavorite: $book.isFavorite)
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.bottom)
