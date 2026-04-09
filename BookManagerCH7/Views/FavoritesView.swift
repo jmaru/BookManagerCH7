@@ -13,6 +13,9 @@ struct FavoritesView:View {
     
     @State var selectedGenre: Genre? = nil
     @State var selectedReadingStatus: ReadingStatus? = nil
+    @State var showFilters: Bool = false
+    
+    @AppStorage("SETTINGS_GRID_COLUMNS_KEY") private var gridColumns: Int = 2
     
     //computed property
     private var favoriteBooks: [Book] {
@@ -20,7 +23,8 @@ struct FavoritesView:View {
     }
     
     private var gridLayout: [GridItem]{
-        [GridItem(.flexible()), GridItem(.flexible())]
+//        [GridItem(.flexible()), GridItem(.flexible())]
+        Array(repeating: GridItem(.flexible()), count: gridColumns)
     }
     
     var body: some View {
@@ -33,9 +37,22 @@ struct FavoritesView:View {
                         ForEach(favoriteBooks){ book in
                             SquareCardView(book: book)
                         }
-                    }.padding()
+                    }.padding(.all, CGFloat(8/gridColumns))
                 }
-            }.navigationTitle("Favorite Books")
+            }
+            .navigationTitle("Favorite Books")
+            .navigationBarItems(leading: Button("Filter"){
+                showFilters.toggle()
+            })
+            .sheet(
+                isPresented: $showFilters,
+                content: {
+                    FiltersView(
+                        selectedGenre: $selectedGenre,
+                        selectedReadingStatus: $selectedReadingStatus
+                    )
+                }
+            )
         }
     }
 }

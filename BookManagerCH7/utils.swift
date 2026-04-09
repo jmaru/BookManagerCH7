@@ -21,6 +21,5 @@ func filterFavoriteBooks(
             readingStatus == nil
             || $0.readingStatus == readingStatus
         )
-        
     }
 }
