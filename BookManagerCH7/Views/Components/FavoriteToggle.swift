@@ -24,7 +24,6 @@ struct FavoriteToggle:View {
                 .offset(y:offsetY) // animate
             
             Toggle(isOn:$isFavorite){
-                
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
                     .foregroundStyle(isFavorite ? .red : .secondary)
                     .font(.title)

@@ -11,27 +11,27 @@ struct FavoritesView:View {
     
     @Binding var books: [Book]
     
+    @State var selectedGenre: Genre? = nil
+    @State var selectedReadingStatus: ReadingStatus? = nil
     
     //computed property
     private var favoriteBooks: [Book] {
-        filterFavoriteBooks(book: books)
+        filterFavoriteBooks(books: books, genre: selectedGenre, readingStatus: selectedReadingStatus)
     }
     
     private var gridLayout: [GridItem]{
-        [GridItem(.flexible()),GridItem(.flexible())]
+        [GridItem(.flexible()), GridItem(.flexible())]
     }
-    
     
     var body: some View {
         NavigationStack{
             ScrollView{
                 if favoriteBooks.isEmpty {
-                    Text("No favorite book").foregroundStyle(.secondary)
+                    Text("No favorite books yet").foregroundStyle(.secondary)
                 }else{
                     LazyVGrid(columns:gridLayout){
                         ForEach(favoriteBooks){ book in
                             SquareCardView(book: book)
-                            
                         }
                     }.padding()
                 }

@@ -17,7 +17,7 @@ struct ContentView: View {
         TabView{
             BookListView(books: $books)
                 .tabItem{
-                    Label("Book",systemImage: "books.vertical.fill")
+                    Label("Books",systemImage: "books.vertical.fill")
                 }
             FavoritesView(books: $books)
                 .tabItem {

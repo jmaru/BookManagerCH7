@@ -29,6 +29,7 @@ struct BookDetailView: View {
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
+                        ColoredCapsule(text:book.genre.rawValue)
                     }
                     Spacer()
                     HStack{
@@ -41,9 +42,15 @@ struct BookDetailView: View {
                 Text(book.summary)
                     .padding(.bottom)
                 //
-                Text("My review")
-                    .font(.title2)
-                    .padding(.bottom)
+                HStack{
+                    Text("My review")
+                        .font(.title2)
+                    Spacer()
+                    ColoredCapsule(
+                        text:book.readingStatus.rawValue,
+                        color:.orange
+                    )
+                }.padding(.bottom)
                 StarRatingView(rating: book.rating)
                 Text(book.review)
                     .padding(8)

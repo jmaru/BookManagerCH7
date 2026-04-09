@@ -19,4 +19,8 @@ struct Book: Identifiable {
     
     var isFavorite: Bool = false
     
+    // genre
+    var genre: Genre = .unknown
+    // reading status
+    var readingStatus: ReadingStatus = .unknown
 }
